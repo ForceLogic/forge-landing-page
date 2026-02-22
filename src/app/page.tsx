@@ -1,8 +1,10 @@
+import Hero from "@/components/Hero";
+
 export default function Home() {
   return (
-    <main className="flex min-h-screen flex-col items-center justify-center">
-      <h1 className="text-4xl font-bold">Forge Logic</h1>
-      <p className="text-gray-400">Próximamente: Nivel 1</p>
+    <main className="min-h-screen bg-black">
+      <Hero />
+      {/* Aquí iremos agregando el resto de las secciones: Servicios, Proyectos, etc. */}
     </main>
-  )
+  );
 }
