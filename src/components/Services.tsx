@@ -1,78 +1,82 @@
 "use client";
 import React from 'react';
 import { motion } from 'framer-motion';
-import { Layout, Database, Rocket, ExternalLink } from 'lucide-react';
+import { Monitor, Wind, Tool, HardDrive, ShieldCheck, Check } from 'lucide-react';
 
 const services = [
   {
-    title: "Landing Pages de Alto Impacto",
-    desc: "Páginas de aterrizaje diseñadas para convertir visitantes en clientes. Ideales para lanzamientos de productos o servicios con una estética moderna y tiempos de carga ultra rápidos.",
-    icon: <Layout className="text-cyan-400" size={28} />,
+    title: "Mantenimiento Integral",
+    price: "$15.000", // Precios de referencia, cámbiados a tu gusto
+    desc: "Limpieza física profunda + Cambio de pasta térmica premium.",
+    features: ["Limpieza de coolers", "Pasta Artic Silver 5", "Pruebas de estrés"],
+    icon: Wind,
+    color: "from-cyan-500/20 to-blue-500/20"
   },
   {
-    title: "Sistemas de Gestión Personalizados",
-    desc: "Dashboards y aplicaciones web para administrar ventas, inventarios o usuarios. Soluciones robustas con bases de datos en tiempo real para optimizar los procesos de tu negocio.",
-    icon: <Database className="text-cyan-400" size={28} />,
+    title: "Sistemas y Software",
+    price: "$12.000",
+    desc: "Instalación de OS y suites profesionales.",
+    features: ["Windows 10/11 Pro", "Office LTSC", "AutoCAD / SolidWorks"],
+    icon: Monitor,
+    color: "from-blue-500/20 to-purple-500/20"
   },
   {
-    title: "MVP para Startups",
-    desc: "Desarrollamos la primera versión funcional de tu idea de negocio (Minimum Viable Product). Enfocado en velocidad y escalabilidad para validar tu proyecto en el mercado real.",
-    icon: <Rocket className="text-cyan-400" size={28} />,
+    title: "Optimización Total",
+    price: "$18.000",
+    desc: "El combo definitivo para que tu PC vuele.",
+    features: ["Mantenimiento físico", "Limpieza de software", "Servicio a domicilio"],
+    icon: ShieldCheck,
+    color: "from-emerald-500/20 to-cyan-500/20"
   }
 ];
 
 const Services = () => {
   return (
-    <section id="servicios" className="py-24 bg-black relative">
-      <div className="max-w-7xl mx-auto px-4">
-        
-        <motion.div 
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          className="text-center mb-16"
-        >
-          <h2 className="text-4xl md:text-5xl font-bold mb-4 text-white">
-            Servicios <span className="text-cyan-400">Especializados</span>
+    <section id="servicios" className="py-24 bg-black px-4">
+      <div className="max-w-7xl mx-auto">
+        <div className="text-center mb-16">
+          <h2 className="text-4xl md:text-6xl font-black text-white tracking-tighter mb-4 uppercase">
+            CATÁLOGO DE <span className="text-cyan-500">SERVICIOS</span>
           </h2>
-          <p className="text-gray-400 max-w-2xl mx-auto italic">
-            "No solo escribimos código, forjamos herramientas que impulsan el crecimiento de tu empresa."
+          <p className="text-gray-400 font-medium max-w-xl mx-auto">
+            Transparencia total. Elige el servicio que necesitas para tu estación de trabajo.
           </p>
-        </motion.div>
+        </div>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-          {services.map((s, i) => (
+          {services.map((item, i) => (
             <motion.div
               key={i}
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ delay: i * 0.2 }}
-              viewport={{ once: true }}
-              className="group p-8 rounded-3xl bg-white/[0.03] border border-white/10 hover:border-cyan-400/50 hover:bg-white/[0.05] transition-all duration-300"
+              whileHover={{ y: -10 }}
+              className="bg-white/5 border border-white/10 p-8 rounded-[2.5rem] flex flex-col group relative overflow-hidden"
             >
-              <div className="mb-6 inline-block p-3 rounded-2xl bg-cyan-400/10 group-hover:scale-110 transition-transform">
-                {s.icon}
+              {/* Fondo decorativo */}
+              <div className={`absolute inset-0 bg-gradient-to-br ${item.color} opacity-0 group-hover:opacity-100 transition-opacity`} />
+              
+              <div className="relative z-10">
+                <item.icon className="text-cyan-400 mb-6" size={40} />
+                <h3 className="text-2xl font-black text-white mb-2 uppercase">{item.title}</h3>
+                <p className="text-gray-400 text-sm mb-6 leading-relaxed">{item.desc}</p>
+                
+                <div className="text-4xl font-black text-white mb-8">
+                   {item.price} <span className="text-xs text-gray-500 font-bold uppercase tracking-widest">Base</span>
+                </div>
+
+                <ul className="space-y-3 mb-8">
+                  {item.features.map((f, idx) => (
+                    <li key={idx} className="flex items-center gap-2 text-xs font-bold text-gray-300 uppercase tracking-tight">
+                      <Check size={14} className="text-cyan-500" /> {f}
+                    </li>
+                  ))}
+                </ul>
+
+                <button className="w-full py-4 bg-white/10 hover:bg-cyan-500 hover:text-black text-white font-black rounded-xl transition-all uppercase text-xs tracking-widest border border-white/10 group-hover:border-transparent">
+                  Pedir Turno
+                </button>
               </div>
-              <h3 className="text-xl font-bold mb-4 text-white group-hover:text-cyan-400 transition-colors">
-                {s.title}
-              </h3>
-              <p className="text-gray-400 text-sm leading-relaxed mb-4">
-                {s.desc}
-              </p>
             </motion.div>
           ))}
         </div>
-
-        {/* Banner de invitación para servicios experimentales (Opcional/Sutil) */}
-        <motion.div 
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
-          className="mt-20 p-8 rounded-3xl border border-dashed border-white/10 text-center"
-        >
-          <p className="text-gray-500 text-sm italic">
-            ¿Tienes un desafío diferente? <span className="text-white">Exploramos nuevas tecnologías</span> para encontrar la solución perfecta a tu medida.
-          </p>
-        </motion.div>
       </div>
     </section>
   );
